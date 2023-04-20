@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="todo-container">
+      <div class="todo-input">
+        <h2>To Do List</h2>
+        <form class="todo-form">
+          <select id="category" name="category">
+            <option value="Workout">Workout</option>
+            <option value="BucketList">BucketList</option>
+            <option value="Study">Study</option>
+          </select>
+          <div>To do</div>
+          <input type="text" id="title" name="title" required />
+          <div>Due Date (yyyymmdd):</div>
+          <input
+            type="number"
+            id="duedate"
+            name="duedate"
+            min="20220419"
+            required
+          />
+          <button type="submit" id="add-btn">추가</button>
+        </form>
+      </div>
+      <ul class="todo-list"></ul>
+      <button id="delete-all-btn">Delete All</button>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
