@@ -1,4 +1,11 @@
 /* Todo Container */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+body {
+  font-family: "Pretendard";
+}
+
 .todo-container {
   display: flex;
   flex-direction: row;
@@ -24,6 +31,7 @@
 }
 
 .todo-input select {
+  height: 40px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -54,7 +62,7 @@ select {
 }
 
 .todo-input #add-btn {
-  background-color: gray;
+  background-color: #ffbf00;
 }
 
 .todo-input #add-btn:hover {
@@ -88,13 +96,14 @@ select {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
-  background-color: #375cff;
+  background-color: #b8e4dc;
   color: #000;
   position: relative;
+  list-style-type: none;
 }
 
 .todo-list li.done {
-  background-color: #00e600;
+  background-color: #a0ca68;
 }
 
 .delete-btn {
@@ -105,6 +114,7 @@ select {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 80%;
 }
 
 .delete-btn:hover {

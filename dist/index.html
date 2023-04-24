@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
   </head>
   <body>
     <div class="todo-container">
@@ -22,15 +27,16 @@
             type="number"
             id="duedate"
             name="duedate"
-            min="20220419"
+            min="20230424"
             required
           />
-          <button type="submit" id="add-btn">추가</button>
+          <button type="submit" id="add-btn">Add</button>
         </form>
       </div>
       <ul class="todo-list"></ul>
-      <button id="delete-all-btn">Delete All</button>
+      <button id="delete-all-btn">Clear</button>
     </div>
+
     <script type="module" src="app.js"></script>
   </body>
 </html>
