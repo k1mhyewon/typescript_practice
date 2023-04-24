@@ -1,14 +1,21 @@
-import { TodoItem } from "../interfaces/TodoItem";
+import { Todos } from "./Todos";
 
 export class TodoTemplate {
-  // 보여주는
-  constructor() {}
+  private ul: HTMLUListElement;
+
+  constructor() {
+    this.ul = document.querySelector("ul")!;
+  }
+
+  /*
+TodoTemplate 클래스의 생성자는 HTMLUListElement 타입의 ul 멤버 변수를 생성하고, 
+이 ul 변수를 document.querySelector("ul")로 초기화한다. 
+이 코드는 HTML 문서 내에 있는 첫 번째 ul 엘리먼트를 선택하게 된다.
+  */
 
   render() {
-    const ul = document.querySelector("ul");
-
     const todoList = localStorage.getItem("todoList");
-    let todoArray: TodoItem[] = [];
+    let todoArray: Todos[] = [];
 
     if (todoList) {
       // 로컬에 있다면
@@ -20,16 +27,18 @@ export class TodoTemplate {
     } else {
       // 로컬에 없다면
       const li = document.createElement("li");
-
-      // const noContent = document.createElement("h4");
       li.textContent = "내용 없음";
 
-      ul!.append(li);
+      this.ul.append(li);
     }
   }
+  /*
+  render() 메소드는 localStorage에서 TodoList를 가져와 TodoItem 객체의 배열로 만든 후, 
+  각 TodoItem 객체를 addTodo() 메소드를 통해 리스트에 추가한다. 
+만약 TodoList가 없다면, "내용 없음"을 표시하는 li 엘리먼트를 생성하여 ul 엘리먼트에 추가한다.
+  */
 
-  addTodo(todoItem: TodoItem, i: number) {
-    const ul = document.querySelector("ul");
+  addTodo(todos: Todos, i: number) {
     const li = document.createElement("li");
     li.id = "li" + i;
 
@@ -55,7 +64,7 @@ export class TodoTemplate {
     labelUndone.htmlFor = "task" + i;
     labelUndone.textContent = "Undone";
 
-    if (todoItem.isDone) {
+    if (todos.isDone) {
       inputDone.checked = true;
       li.className = "done";
     } else {
@@ -63,13 +72,13 @@ export class TodoTemplate {
     }
 
     const category = document.createElement("h3");
-    category.textContent = todoItem.category.toString();
+    category.textContent = "[" + todos.category.toString() + "]";
 
     const duedate = document.createElement("h4");
-    duedate.textContent = todoItem.duedate.toString();
+    duedate.textContent = "Due date: " + todos.duedate.toString();
 
     const title = document.createElement("h4");
-    title.textContent = todoItem.title;
+    title.textContent = todos.title;
 
     const button = document.createElement("button");
     button.textContent = "delete";
@@ -86,6 +95,19 @@ export class TodoTemplate {
       title,
       button
     );
-    ul!.append(li);
+    this.ul.append(li);
   }
+
+  /*
+addTodo() 메소드는 TodoItem 객체와 해당 객체의 인덱스 값을 받아서, 
+HTML 엘리먼트를 생성하고 이를 ul 엘리먼트에 추가한다. 
+TodoItem 객체의 isDone 멤버 변수 값에 따라서 inputDone 또는 inputUndone 엘리먼트가 선택되도록 설정하고, 
+이에 따라서 li 엘리먼트에 done 클래스가 추가된다.
+  */
 }
+
+/*
+TodoTemplate 클래스를 정의하는 것으로, 
+TodoList를 보여주기 위한 HTML 엘리먼트를 생성하는 메소드와, 
+TodoItem 객체를 받아서 리스트에 추가하는 메소드를 가지고 있다.
+*/
