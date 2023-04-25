@@ -1,23 +1,35 @@
+import { Store } from "./Store.js";
+// TodoItem 클래스를 멤버로 가지고 있고 todo를 등록/수정/삭제하는 역할만 한다
 export class Todos {
-    constructor(todoId, category, title, duedate, isDone) {
-        this.todoId = todoId;
-        this.category = category;
-        this.title = title;
-        this.duedate = duedate;
-        this.isDone = isDone;
+    constructor() {
+        this.todoItems = Store.getTodoItems();
+    }
+    // todo item 추가하기
+    addTodoItem(item) {
+        this.todoItems.push(item); // 새로운 item 추가
+        Store.saveTodoItems(this.todoItems); // localStorage에 저장
+    }
+    // isDone 업데이트
+    updateIsDoneTodoItem(id, str_bool) {
+        for (const todo of this.todoItems) {
+            if (todo.todoId === id && str_bool === "true") {
+                todo.isDone = true;
+            }
+            else if (todo.todoId === id && str_bool === "false") {
+                todo.isDone = false;
+            }
+        }
+        Store.saveTodoItems(this.todoItems);
+    }
+    // todo 삭제하기
+    deleteTodoItem(id) {
+        if (this.todoItems.length > 0) {
+            this.todoItems = this.todoItems.filter((e) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
+            Store.saveTodoItems(this.todoItems); // localStorage에 저장
+        }
+        else {
+            console.log("length else");
+            Store.clearLocalStorage(); // localStorage clear
+        }
     }
 }
-/*
-Todos라는 클래스를 정의하고 있다.
-Todos 클래스는 TodoItem 인터페이스를 구현하고 있으며, Category 열거형을 참조하고 있다.
-
-TodoItem 인터페이스는 todoId, category, title, duedate, isDone 속성으로 구성되어 있으며,
-Todos 클래스는 이 인터페이스를 구현하도록 되어 있다.
-
-Todos 클래스는 생성자를 통해 todoId, category, title, duedate, isDone 속성 값을 받아서 객체를 생성한다.
-이렇게 생성된 Todos 객체는 TodoItem 인터페이스의 모든 속성을 가지고 있다.
-
-즉, Todos 클래스는 할 일 목록을 표현하는 객체이며, 이 객체는 할 일의 ID, 카테고리, 제목, 마감 기한, 완료 여부 등의
-정보를 가지고 있다. 이러한 정보들을 생성자를 통해 입력받아 객체를 생성할 수 있다.
-
-*/

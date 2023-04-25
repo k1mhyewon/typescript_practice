@@ -120,3 +120,12 @@ select {
 .delete-btn:hover {
   background-color: #ff8000;
 }
+
+.due-date-over {
+  text-decoration:line-through;
+}
+
+/* todo-manage  */
+.todo-manage {
+  display: inline;
+}

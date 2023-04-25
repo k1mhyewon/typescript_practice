@@ -11,14 +11,13 @@
     />
   </head>
   <body>
+    <a href="category.html">to category</a>
     <div class="todo-container">
       <div class="todo-input">
         <h2>To Do List</h2>
         <form class="todo-form">
           <select id="category" name="category">
-            <option value="Workout">Workout</option>
-            <option value="BucketList">BucketList</option>
-            <option value="Study">Study</option>
+            
           </select>
           <div>To do</div>
           <input type="text" id="title" name="title" required />
@@ -27,7 +26,7 @@
             type="number"
             id="duedate"
             name="duedate"
-            min="20230424"
+            min="20230420"
             required
           />
           <button type="submit" id="add-btn">Add</button>
@@ -36,7 +35,7 @@
       <ul class="todo-list"></ul>
       <button id="delete-all-btn">Clear</button>
     </div>
-
+    
     <script type="module" src="app.js"></script>
   </body>
 </html>
