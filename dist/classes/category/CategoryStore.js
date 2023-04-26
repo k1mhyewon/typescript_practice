@@ -4,7 +4,7 @@ export class CategoryStore {
         let categoryList = localStorage.getItem("categoryList");
         if (categoryList) {
             return JSON.parse(categoryList);
-            // 가져온 데이터가 있다면 JSON.parse() 메소드를 사용하여 JSON 문자열을 파싱하고 TodoItem[] 형태로 변환하여 반환한다.
+            // 가져온 데이터가 있다면 JSON.parse() 메소드를 사용하여 JSON 문자열을 파싱하고 string[] 형태로 변환하여 반환한다.
         }
         else {
             return [];

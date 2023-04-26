@@ -1,46 +1,44 @@
 import { CategoryTemplate } from "./classes/category/CategoryTemplate.js";
 import { Categories } from "./classes/category/Categories.js";
 
-const categoryform = document.querySelector(".category-input-form") as HTMLFormElement;
+const categoryform = document.querySelector(
+  ".category-input-form"
+) as HTMLFormElement;
 const inputName = document.querySelector("#category-input") as HTMLInputElement;
 
 const categoryTemp = new CategoryTemplate();
 const categories = new Categories();
 
-
 categoryTemp.render();
 
 // category 추가하기
 categoryform.addEventListener("submit", (e: Event) => {
-    // e.preventDefault();
-    
-    const bool: boolean = categories.categoryValidCheck(inputName.value);
+  // e.preventDefault();
 
-    if(bool) {
-        alert("이미 존재하는 카테고리명입니다.");
-    }
-    else {
-        categories.addCategory(inputName.value);
-    }
-    
+  const bool: boolean = categories.categoryValidCheck(inputName.value);
+
+  if (bool) {
+    alert("이미 존재하는 카테고리명입니다.");
+  } else {
+    categories.addCategory(inputName.value);
+  }
 });
 
 // 카테고리 개별 삭제
 const delBtn = document.querySelectorAll(".delete-button");
 Array.from(delBtn).forEach((btn) => {
-    btn.addEventListener("click", (e: Event) => {  
-      const id: string = btn.id;
-    
-      // category 삭제 유효성 검사 - true 이면 사용중인 카테고리(삭제 불가)
-      const bool = categories.checkCategoryUsed(id);
-      
-      if(!bool){
-        categories.deleteCategory(id);
-      }
-      else {
-        alert("이미 사용중인 카테고리이므로 삭제가 불가합니다.");
-      }
-  
-      location.reload();
-    });
+  btn.addEventListener("click", (e: Event) => {
+    const id: string = btn.id;
+
+    // category 삭제 유효성 검사 - true 이면 사용중인 카테고리(삭제 불가)
+    const bool = categories.checkCategoryUsed(id);
+
+    if (!bool) {
+      categories.deleteCategory(id);
+    } else {
+      alert("현재 사용중인 카테고리이므로 삭제가 불가합니다.");
+    }
+
+    location.reload();
   });
+});

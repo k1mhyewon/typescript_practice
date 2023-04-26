@@ -37,12 +37,3 @@ export class Categories {
         CategoryStore.saveCategory(categories);
     }
 }
-// category 알아오기
-/*
-    searchCategoryList(){
-        this.categories.forEach(e => {
-            let categories: string[] = [];
-            categories = CategoryStore.getCategoryList(); // string[] 형태로 반환
-        });
-    }
-    */

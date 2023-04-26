@@ -1,9 +1,8 @@
-
 export enum DateValidCheck {
-  PASS,     // 통과
-  NODATE,   // 유효하지 않은 날짜
+  PASS, // 통과
+  NODATE, // 유효하지 않은 날짜
   PASTDATE, // 지난 날짜
-} 
+}
 
 export interface InterTodoItem {
   todoId: string;
@@ -24,7 +23,7 @@ export class TodoItem implements InterTodoItem {
   ) {}
 
   // 날짜 유효성 검사
-  checkDate(duedate: string): DateValidCheck {  
+  checkDate(duedate: string): DateValidCheck {
     let dateComp: string =
       duedate.substring(0, 4) +
       "-" +
@@ -32,20 +31,19 @@ export class TodoItem implements InterTodoItem {
       "-" +
       duedate.substring(6, 8);
 
-    let result: DateValidCheck = 1; 
+    let result: DateValidCheck = 1;
     // 0: pass(true) 1:invalid date(false) 2:past date(false)
 
     try {
       const now = new Date();
       const inputDate = new Date(dateComp);
-      
+
       inputDate.toISOString();
       result = 0; // 0: pass(true)
 
-      if(inputDate < now) {
+      if (inputDate < now) {
         result = 2; // 2: past date(false)
       }
-      
     } catch (e) {
       result = 1; // 1: invalid date(false)
       console.log(e);
@@ -54,6 +52,3 @@ export class TodoItem implements InterTodoItem {
     return result;
   }
 }
-
-
-

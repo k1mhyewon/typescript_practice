@@ -30,6 +30,6 @@ export class CategoryTemplate {
             <span>Workout</span>
             <button class="delete-button" id="Workout">Del</button>
         </li>
-        */
+    */
   }
 }

@@ -27,7 +27,7 @@ Array.from(delBtn).forEach((btn) => {
             categories.deleteCategory(id);
         }
         else {
-            alert("이미 사용중인 카테고리이므로 삭제가 불가합니다.");
+            alert("현재 사용중인 카테고리이므로 삭제가 불가합니다.");
         }
         location.reload();
     });
