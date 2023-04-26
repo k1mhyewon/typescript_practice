@@ -1,8 +1,8 @@
-import { TodoTemplate } from "./classes/TodoTemplate.js";
-import { Todos } from "./classes/Todos.js";
-import { TodoItem } from "./interfaces/TodoItem.js";
-import { Store } from "./classes/Store.js";
-import { DateValidCheck } from "./interfaces/TodoItem.js";
+import { TodoTemplate } from "./classes/todo/TodoTemplate.js";
+import { Todos } from "./classes/todo/Todos.js";
+import { TodoItem } from "./classes/todo/TodoItem.js";
+import { TodoStore } from "./classes/todo/TodoStore.js";
+import { DateValidCheck } from "./classes/todo/TodoItem.js";
 
 const form = document.querySelector(".todo-form") as HTMLFormElement;
 const category = document.querySelector("#category") as HTMLSelectElement;
@@ -13,10 +13,11 @@ const todoTemp = new TodoTemplate();
 const todos = new Todos();
 
 
-todoTemp.render();
+// todoTemp.render();
+todoTemp.getCategorySelect(); // category select 가져오기 
 
 form.addEventListener("submit", (e: Event) => {
-  // e.preventDefault();
+  e.preventDefault();
 
   let n_id: number = 0; // todo id값
 
@@ -29,10 +30,10 @@ form.addEventListener("submit", (e: Event) => {
   );
   
   const validCheck: DateValidCheck = newTodoItem.checkDate(duedate.value);
-  
   // DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
-  if(validCheck === 0 ){
-    const todoList:TodoItem[] = Store.getTodoItems();
+
+  if(validCheck === 0 ){ // 0: pass(true)
+    const todoList:TodoItem[] = TodoStore.getTodoItems();
     
     if (todoList.length > 0) {
       n_id = parseInt(todoList[todoList.length - 1].todoId) + 1;
@@ -42,25 +43,26 @@ form.addEventListener("submit", (e: Event) => {
     todos.addTodoItem(newTodoItem);
 
     // 폼 초기화
-    title.value = "";
-    duedate.value = "";
+    // title.value = "";
+    // duedate.value = "";
+    location.href = 'todoList.html';
   } 
-  else if(validCheck === 1) {
+  else if(validCheck === 1) { // 1:invalid date(false)
     alert("날짜를 올바르게 입력하세요");
     duedate.value = "";
   }
-  else if(validCheck === 2){
+  else if(validCheck === 2){ // 2:past date(false)
     alert("지난 날짜는 입력할 수 없습니다.");
     duedate.value = "";
   }
   
 });
 
-// 리스트 개별 삭제
+// 리스트 개별 삭제 - list
+/*
 const delBtn = document.querySelectorAll(".delete-btn");
 Array.from(delBtn).forEach((btn) => {
   btn.addEventListener("click", (e: Event) => {  
-    // const id: string = btn.id.substring(11);
     const id: string = btn.id.split("delete-btn-")[1];
     
     todos.deleteTodoItem(id);
@@ -68,8 +70,10 @@ Array.from(delBtn).forEach((btn) => {
     location.reload();
   });
 });
+*/
 
-// 완료 미완료
+// 완료 미완료 - list
+/*
 const radios = document.querySelectorAll(".radios");
 Array.from(radios).forEach((radio) => {
   radio.addEventListener("click", (e: Event) => {
@@ -81,29 +85,13 @@ Array.from(radios).forEach((radio) => {
     location.reload();
   });
 });
-
-// 로컬 스토리지 비우기 (delete all 버튼)
+*/
+// 로컬 스토리지 비우기 (delete all 버튼) - list
+/*
 document
   .getElementById("delete-all-btn")!
   .addEventListener("click", (e: Event) => {
     Store.clearLocalStorage();
     location.reload();
   });
-
-
-
-// Category 값 변환 함수
-/*
-function convertToCategory(value: string): EnumCategory {
-  switch (value) {
-    case "BucketList":
-      return EnumCategory.BucketList;
-    case "Study":
-      return EnumCategory.Study;
-    case "Workout":
-      return EnumCategory.Workout;
-    default:
-      throw new Error(`Unknown category: ${value}`);
-  }
-}
 */

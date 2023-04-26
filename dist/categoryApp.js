@@ -1,5 +1,5 @@
-import { CategoryTemplate } from "./classes/CategoryTemplate.js";
-import { Categories } from "./classes/Categories.js";
+import { CategoryTemplate } from "./classes/category/CategoryTemplate.js";
+import { Categories } from "./classes/category/Categories.js";
 const categoryform = document.querySelector(".category-input-form");
 const inputName = document.querySelector("#category-input");
 const categoryTemp = new CategoryTemplate();

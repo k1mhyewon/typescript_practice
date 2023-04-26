@@ -2,9 +2,7 @@
 
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
-body {
-  font-family: "Pretendard";
-}
+body { font-family: "Pretendard"; }
 
 .todo-container {
   display: flex;
@@ -63,6 +61,7 @@ select {
 
 .todo-input #add-btn {
   background-color: #ffbf00;
+  width: 508px;
 }
 
 .todo-input #add-btn:hover {

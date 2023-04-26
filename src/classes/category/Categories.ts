@@ -1,5 +1,5 @@
-import { Store } from "./Store.js";
-import { TodoItem } from "../interfaces/TodoItem.js";
+import { TodoStore } from "../todo/TodoStore.js";
+import { TodoItem } from "../todo/TodoItem.js";
 import { CategoryStore } from "./CategoryStore.js";
 
 const categoryStore = new CategoryStore();
@@ -10,7 +10,7 @@ export class Categories {
 
     constructor(){
         this.categories = CategoryStore.getCategoryList();
-        this.todoItems = Store.getTodoItems();
+        this.todoItems = TodoStore.getTodoItems();
     }
 
     // category 알아오기

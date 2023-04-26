@@ -1,27 +1,18 @@
-import { TodoItem } from "../interfaces/TodoItem.js";
-import { Store } from "./Store.js";
-import { CategoryStore } from "./CategoryStore.js";
+import { TodoItem } from "./TodoItem.js";
+import { TodoStore } from "./TodoStore.js";
+import { CategoryStore } from "../category/CategoryStore.js";
 export class TodoTemplate {
     constructor() {
-        this.todoItems = Store.getTodoItems();
+        this.todoItems = TodoStore.getTodoItems();
     }
-    /*
-  TodoTemplate 클래스의 생성자는 HTMLUListElement 타입의 ul 멤버 변수를 생성하고,
-  이 ul 변수를 document.querySelector("ul")로 초기화한다.
-  이 코드는 HTML 문서 내에 있는 첫 번째 ul 엘리먼트를 선택하게 된다.
-    */
     render() {
         const ul = document.querySelector("ul");
-        // console.log(this.todoItems);
-        this.getCategorySelect(); // category select 가져오기 
-        if (this.todoItems.length > 0) {
-            // 로컬에 있다면
+        if (this.todoItems.length > 0) { // 로컬에 있다면
             this.todoItems.forEach((todo) => {
                 this.addTodo(todo);
             });
         }
-        else if (this.todoItems.length == 0) {
-            // 로컬에 없다면
+        else if (this.todoItems.length == 0) { // 로컬에 없다면
             const li = document.createElement("li");
             li.textContent = "내용 없음";
             ul.append(li);
@@ -62,7 +53,7 @@ export class TodoTemplate {
         const validcheck = todoItem.checkDate(todo.duedate.toString());
         const duedate = document.createElement("h4");
         duedate.textContent = "Due date: " + todo.duedate.toString();
-        if (validcheck === 2) {
+        if (validcheck === 2) { // duedate가 지났다면
             duedate.setAttribute("class", "due-date-over");
         }
         const title = document.createElement("h4");
@@ -74,6 +65,7 @@ export class TodoTemplate {
         li.append(inputDone, labelDone, inputUndone, labelUndone, category, duedate, title, button);
         ul.append(li);
     }
+    // localStorage에 있는 "categoryList" 키값을 가진 value 얻어와서 select에 넣어주기
     getCategorySelect() {
         const categories = CategoryStore.getCategoryList();
         const select = document.querySelector("select");

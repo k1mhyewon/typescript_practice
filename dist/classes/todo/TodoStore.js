@@ -1,4 +1,4 @@
-export class Store {
+export class TodoStore {
     // TodoItem 들을 얻어오는 함수
     static getTodoItems() {
         let todoList = localStorage.getItem("todoList");

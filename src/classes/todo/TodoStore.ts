@@ -1,7 +1,7 @@
 // TodoItem 안의 데이터를 관리하는 역할만 한다
-import { TodoItem } from "../interfaces/TodoItem.js";
+import { TodoItem } from "./TodoItem.js";
 
-export class Store {
+export class TodoStore {
 
     // TodoItem 들을 얻어오는 함수
     static getTodoItems(): TodoItem[] {

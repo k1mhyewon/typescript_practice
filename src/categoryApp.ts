@@ -1,6 +1,5 @@
-import { CategoryStore } from "./classes/CategoryStore.js";
-import { CategoryTemplate } from "./classes/CategoryTemplate.js";
-import { Categories } from "./classes/Categories.js";
+import { CategoryTemplate } from "./classes/category/CategoryTemplate.js";
+import { Categories } from "./classes/category/Categories.js";
 
 const categoryform = document.querySelector(".category-input-form") as HTMLFormElement;
 const inputName = document.querySelector("#category-input") as HTMLInputElement;
