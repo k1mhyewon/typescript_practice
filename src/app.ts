@@ -14,7 +14,7 @@ const todos = new Todos();
 
 todoTemp.emptyCategoryCheck();
 // todoTemp.render();
-todoTemp.getCategorySelect(); // category select 가져오기 
+todoTemp.getCategorySelect(); // category select 가져오기
 
 form.addEventListener("submit", (e: Event) => {
   e.preventDefault();
@@ -22,19 +22,19 @@ form.addEventListener("submit", (e: Event) => {
   let n_id: number = 0; // todo id값
 
   let newTodoItem = new TodoItem(
-      n_id.toString(),
-      category.value,
-      title.value,
-      parseInt(duedate.value),
-      false
+    n_id.toString(),
+    category.value,
+    title.value,
+    parseInt(duedate.value),
+    false
   );
-  
+
   const validCheck: DateValidCheck = newTodoItem.checkDate(duedate.value);
   // DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
 
-  if(validCheck === 0 ){ // 0: pass(true)
-    const todoList:TodoItem[] = TodoStore.getTodoItems();
-    
+  if (validCheck === 0) {
+    const todoList: TodoItem[] = TodoStore.getTodoItems();
+
     if (todoList.length > 0) {
       n_id = parseInt(todoList[todoList.length - 1].todoId) + 1;
       newTodoItem.todoId = n_id.toString();
@@ -42,15 +42,12 @@ form.addEventListener("submit", (e: Event) => {
 
     todos.addTodoItem(newTodoItem);
 
-    location.href = 'todoList.html';
-  } 
-  else if(validCheck === 1) { // 1:invalid date(false)
+    location.href = "todoList.html";
+  } else if (validCheck === 1) {
     alert("날짜를 올바르게 입력하세요");
     duedate.value = "";
-  }
-  else if(validCheck === 2){ // 2:past date(false)
+  } else if (validCheck === 2) {
     alert("지난 날짜는 입력할 수 없습니다.");
     duedate.value = "";
   }
-  
 });
