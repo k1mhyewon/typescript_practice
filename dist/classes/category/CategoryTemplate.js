@@ -2,7 +2,7 @@ import { CategoryStore } from "./CategoryStore.js";
 export class CategoryTemplate {
     render() {
         let categories = CategoryStore.getCategoryList(); // string[] 형태로 반환
-        categories.forEach(e => {
+        categories.forEach((e) => {
             this.addCategory(e);
         });
     }
@@ -19,12 +19,10 @@ export class CategoryTemplate {
         li.append(span, button);
         ul === null || ul === void 0 ? void 0 : ul.append(li);
         /*
-        <li class="category-item">
-            <span>Workout</span>
-            <button class="delete-button" id="Workout">Del</button>
-        </li>
-        */
-    }
-    emptyCategory() {
+            <li class="category-item">
+                <span>Workout</span>
+                <button class="delete-button" id="Workout">Del</button>
+            </li>
+            */
     }
 }

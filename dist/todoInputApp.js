@@ -8,15 +8,14 @@ const title = document.querySelector("#title");
 const duedate = document.querySelector("#duedate");
 const todoTemp = new TodoTemplate();
 const todos = new Todos();
-todoTemp.emptyCategoryCheck();
-// todoTemp.render();
+todoTemp.emptyCategoryCheck(); // localStorage에 카테고리가 없으면 a태그 띄우기
 todoTemp.getCategorySelect(); // category select 가져오기
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     let n_id = 0; // todo id값
     let newTodoItem = new TodoItem(n_id.toString(), category.value, title.value, parseInt(duedate.value), false);
     const validCheck = newTodoItem.checkDate(duedate.value);
-    // DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
+    // 날짜 유효성 검사 DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
     if (validCheck === 0) {
         const todoList = TodoStore.getTodoItems();
         if (todoList.length > 0) {

@@ -23,12 +23,16 @@ export class Todos {
     }
     // todo 삭제하기
     deleteTodoItem(id) {
-        if (this.todoItems.length > 0) {
-            this.todoItems = this.todoItems.filter((e) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
-            TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
-        }
-        else {
-            TodoStore.clearLocalStorage(); // localStorage clear
-        }
+        this.todoItems = this.todoItems.filter((e) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
+        TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
     }
 }
+/*
+    if(this.todoItems.length > 0) {
+      this.todoItems = this.todoItems.filter((e) =>  e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
+      TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
+    }
+    else {
+      TodoStore.clearLocalStorage(); // localStorage clear
+    }
+    */

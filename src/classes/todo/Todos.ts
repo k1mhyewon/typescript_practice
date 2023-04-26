@@ -3,10 +3,9 @@ import { TodoStore } from "./TodoStore.js";
 
 // TodoItem 클래스를 멤버로 가지고 있고 todo를 등록/수정/삭제하는 역할만 한다
 export class Todos {
-
   private todoItems: TodoItem[];
 
-  constructor(){
+  constructor() {
     this.todoItems = TodoStore.getTodoItems();
   }
 
@@ -25,12 +24,18 @@ export class Todos {
         todo.isDone = false;
       }
     }
-    
+
     TodoStore.saveTodoItems(this.todoItems);
   }
 
   // todo 삭제하기
   deleteTodoItem(id: string): void {
+    this.todoItems = this.todoItems.filter((e) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
+    TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
+  }
+}
+
+/*
     if(this.todoItems.length > 0) {
       this.todoItems = this.todoItems.filter((e) =>  e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
       TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
@@ -38,10 +43,4 @@ export class Todos {
     else {
       TodoStore.clearLocalStorage(); // localStorage clear
     }
-
-  }
-
-  
-}
-
-
+    */

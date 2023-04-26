@@ -12,8 +12,7 @@ const duedate = document.querySelector("#duedate") as HTMLInputElement;
 const todoTemp = new TodoTemplate();
 const todos = new Todos();
 
-todoTemp.emptyCategoryCheck();
-// todoTemp.render();
+todoTemp.emptyCategoryCheck(); // localStorage에 카테고리가 없으면 a태그 띄우기
 todoTemp.getCategorySelect(); // category select 가져오기
 
 form.addEventListener("submit", (e: Event) => {
@@ -30,7 +29,7 @@ form.addEventListener("submit", (e: Event) => {
   );
 
   const validCheck: DateValidCheck = newTodoItem.checkDate(duedate.value);
-  // DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
+  // 날짜 유효성 검사 DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
 
   if (validCheck === 0) {
     const todoList: TodoItem[] = TodoStore.getTodoItems();
@@ -41,7 +40,6 @@ form.addEventListener("submit", (e: Event) => {
     }
 
     todos.addTodoItem(newTodoItem);
-
     location.href = "todoList.html";
   } else if (validCheck === 1) {
     alert("날짜를 올바르게 입력하세요");

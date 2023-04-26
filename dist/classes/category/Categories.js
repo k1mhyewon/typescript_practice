@@ -6,15 +6,6 @@ export class Categories {
         this.categories = CategoryStore.getCategoryList();
         this.todoItems = TodoStore.getTodoItems();
     }
-    // category 알아오기
-    /*
-    searchCategoryList(){
-        this.categories.forEach(e => {
-            let categories: string[] = [];
-            categories = CategoryStore.getCategoryList(); // string[] 형태로 반환
-        });
-    }
-    */
     // category 중복 검사
     categoryValidCheck(item) {
         for (let category of this.categories) {
@@ -46,3 +37,12 @@ export class Categories {
         CategoryStore.saveCategory(categories);
     }
 }
+// category 알아오기
+/*
+    searchCategoryList(){
+        this.categories.forEach(e => {
+            let categories: string[] = [];
+            categories = CategoryStore.getCategoryList(); // string[] 형태로 반환
+        });
+    }
+    */
