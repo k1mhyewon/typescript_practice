@@ -61,7 +61,7 @@ select {
 
 .todo-input #add-btn {
   background-color: #ffbf00;
-  width: 508px;
+  width: 100%;
 }
 
 .todo-input #add-btn:hover {
