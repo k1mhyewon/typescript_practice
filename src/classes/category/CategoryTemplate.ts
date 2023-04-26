@@ -34,5 +34,9 @@ export class CategoryTemplate {
         */
     }
 
+    emptyCategory() {
+        
+    }
+
     
 }

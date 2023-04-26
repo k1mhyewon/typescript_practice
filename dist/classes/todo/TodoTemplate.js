@@ -77,4 +77,13 @@ export class TodoTemplate {
         }
         // <option value="Workout">Workout</option>
     }
+    // 카테고리 항목이 없다면 안내문구 보여주기
+    emptyCategoryCheck() {
+        const categories = CategoryStore.getCategoryList();
+        let aTagCategory = document.querySelector("#empty-categoty-alert");
+        if (!categories || categories.length === 0) {
+            console.log("empty");
+            aTagCategory.removeAttribute("class");
+        }
+    }
 }

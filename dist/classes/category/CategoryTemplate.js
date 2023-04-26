@@ -25,4 +25,6 @@ export class CategoryTemplate {
         </li>
         */
     }
+    emptyCategory() {
+    }
 }

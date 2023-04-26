@@ -128,3 +128,7 @@ select {
 .todo-manage {
   display: inline;
 }
+
+.display-none {
+  display: none;
+}
