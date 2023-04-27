@@ -1,10 +1,10 @@
-import { TodoStore } from "./TodoStore.js";
-import { CategoryStore } from "../category/CategoryStore.js";
+import { DateValidCheck } from "../../enum/DateValidCheck.js";
 import { Todos } from "./Todos.js";
+import { LocalStorageController } from "../LocalStorageController.js";
 const todos = new Todos();
 export class TodoTemplate {
     constructor() {
-        this.todoItems = TodoStore.getTodoItems();
+        this.todoItems = LocalStorageController.getLocalStorageList("todoList");
     }
     render() {
         const ul = document.querySelector("ul");
@@ -31,7 +31,7 @@ export class TodoTemplate {
         inputDone.className = "radios";
         const labelDone = document.createElement("label");
         labelDone.htmlFor = "task" + todo.todoId;
-        labelDone.textContent = "Done";
+        labelDone.innerHTML = "Done";
         const inputUndone = document.createElement("input");
         inputUndone.type = "radio";
         inputUndone.id = "task" + todo.todoId;
@@ -40,7 +40,7 @@ export class TodoTemplate {
         inputUndone.className = "radios";
         const labelUndone = document.createElement("label");
         labelUndone.htmlFor = "task" + todo.todoId;
-        labelUndone.textContent = "Undone";
+        labelUndone.innerHTML = "Undone";
         if (todo.isDone) {
             inputDone.checked = true;
             li.className = "done";
@@ -49,18 +49,18 @@ export class TodoTemplate {
             inputUndone.checked = true;
         }
         const category = document.createElement("h3");
-        category.textContent = "[" + todo.category.toString() + "]";
+        category.innerHTML = "[" + todo.category.toString() + "]";
         console.log(todo.duedate.toString());
         const validcheck = todos.checkDate(todo.duedate.toString());
         const duedate = document.createElement("h4");
-        duedate.textContent = "Due date: " + todo.duedate.toString();
-        if (validcheck === 2) { // duedate가 지났다면
+        duedate.innerHTML = "Due date: " + todo.duedate.toString();
+        if (validcheck === DateValidCheck.PASTDATE) { // duedate가 지났다면 줄 그어주는 css 클래스 추가
             duedate.setAttribute("class", "due-date-over");
         }
         const title = document.createElement("h4");
-        title.textContent = todo.title;
+        title.innerHTML = todo.title;
         const button = document.createElement("button");
-        button.textContent = "delete";
+        button.innerHTML = "delete";
         button.setAttribute("class", "delete-btn");
         button.setAttribute("id", "delete-btn-" + todo.todoId);
         li.append(inputDone, labelDone, inputUndone, labelUndone, category, duedate, title, button);
@@ -68,22 +68,22 @@ export class TodoTemplate {
     }
     // localStorage에 있는 "categoryList" 키값을 가진 value 얻어와서 select에 넣어주기
     getCategorySelect() {
-        const categories = CategoryStore.getCategoryList();
+        // const categories: string[] = CategoryStore.getCategoryList();
+        const categories = LocalStorageController.getLocalStorageList("categoryList");
         const select = document.querySelector("select");
         for (let category of categories) {
             const option = document.createElement("option");
             option.value = category;
-            option.textContent = category;
+            option.innerHTML = category;
             select === null || select === void 0 ? void 0 : select.append(option);
         }
         // <option value="Workout">Workout</option>
     }
     // 카테고리 항목이 없다면 안내문구 보여주기
     emptyCategoryCheck() {
-        const categories = CategoryStore.getCategoryList();
+        const categories = LocalStorageController.getLocalStorageList("categoryList");
         let aTagCategory = document.querySelector("#empty-categoty-alert");
         if (!categories || categories.length === 0) {
-            console.log("empty");
             aTagCategory.removeAttribute("class");
         }
     }

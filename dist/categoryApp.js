@@ -18,7 +18,7 @@ categoryform.addEventListener("submit", (e) => {
 });
 // 카테고리 개별 삭제
 const delBtn = document.querySelectorAll(".delete-button");
-Array.from(delBtn).forEach((btn) => {
+delBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         const id = btn.id;
         // category 삭제 유효성 검사 - true 이면 사용중인 카테고리(삭제 불가)

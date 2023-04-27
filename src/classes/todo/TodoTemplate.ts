@@ -1,8 +1,7 @@
 import { TodoItem } from "./TodoItem.js";
-import { TodoStore } from "./TodoStore.js";
 import { DateValidCheck } from "../../enum/DateValidCheck.js";
-import { CategoryStore } from "../category/CategoryStore.js";
 import { Todos } from "./Todos.js";
+import { LocalStorageController } from "../LocalStorageController.js";
 
 const todos = new Todos();
 
@@ -10,7 +9,7 @@ export class TodoTemplate {
   private todoItems: TodoItem[];
 
   constructor(){
-    this.todoItems = TodoStore.getTodoItems();
+    this.todoItems = LocalStorageController.getLocalStorageList<TodoItem[]>("todoList");
   }
 
 
@@ -73,7 +72,7 @@ export class TodoTemplate {
     const duedate = document.createElement("h4");
     duedate.innerHTML = "Due date: " + todo.duedate.toString();
 
-    if( validcheck === 2){ // duedate가 지났다면
+    if( validcheck === DateValidCheck.PASTDATE){ // duedate가 지났다면 줄 그어주는 css 클래스 추가
       duedate.setAttribute("class", "due-date-over");
     }
 
@@ -100,7 +99,8 @@ export class TodoTemplate {
 
   // localStorage에 있는 "categoryList" 키값을 가진 value 얻어와서 select에 넣어주기
   getCategorySelect() {
-    const categories: string[] = CategoryStore.getCategoryList();
+    // const categories: string[] = CategoryStore.getCategoryList();
+    const categories = LocalStorageController.getLocalStorageList<string[]>("categoryList");
 
     const select = document.querySelector("select");
 
@@ -117,7 +117,7 @@ export class TodoTemplate {
 
   // 카테고리 항목이 없다면 안내문구 보여주기
   emptyCategoryCheck() {
-    const categories: string[] = CategoryStore.getCategoryList();
+    const categories = LocalStorageController.getLocalStorageList<string[]>("categoryList");
 
     let aTagCategory = document.querySelector("#empty-categoty-alert") as HTMLSelectElement;
 

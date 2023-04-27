@@ -1,10 +1,10 @@
-import { TodoStore } from "../todo/TodoStore.js";
 import { CategoryStore } from "./CategoryStore.js";
+import { LocalStorageController } from "../LocalStorageController.js";
 const categoryStore = new CategoryStore();
 export class Categories {
     constructor() {
-        this.categories = CategoryStore.getCategoryList();
-        this.todoItems = TodoStore.getTodoItems();
+        this.categories = LocalStorageController.getLocalStorageList("categoryList");
+        this.todoItems = LocalStorageController.getLocalStorageList("todoList");
     }
     // category 중복 검사
     categoryValidCheck(item) {
@@ -17,9 +17,8 @@ export class Categories {
     }
     // category 추가
     addCategory(item) {
-        let categories = CategoryStore.getCategoryList();
-        categories.push(item);
-        CategoryStore.saveCategory(categories);
+        this.categories.push(item);
+        CategoryStore.saveCategory(this.categories);
     }
     // category 삭제 유효성 검사 - true 이면 사용중인 카테고리(삭제 불가)
     checkCategoryUsed(item) {
@@ -32,8 +31,7 @@ export class Categories {
     }
     // category 삭제
     deleteCategory(item) {
-        let categories = CategoryStore.getCategoryList();
-        categories = categories.filter((e) => e !== item);
-        CategoryStore.saveCategory(categories);
+        this.categories.filter((e) => e !== item);
+        CategoryStore.saveCategory(this.categories);
     }
 }

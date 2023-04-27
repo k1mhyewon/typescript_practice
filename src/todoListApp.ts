@@ -1,6 +1,6 @@
 import { TodoTemplate } from "./classes/todo/TodoTemplate.js";
 import { Todos } from "./classes/todo/Todos.js";
-import { TodoStore } from "./classes/todo/TodoStore.js";
+import { LocalStorageController } from "./classes/LocalStorageController.js";
 
 const todoTemp = new TodoTemplate();
 const todos = new Todos();
@@ -36,6 +36,6 @@ radios.forEach((radio) => {
 document
   .getElementById("delete-all-btn")!
   .addEventListener("click", (e: Event) => {
-    TodoStore.clearLocalStorage();
+    LocalStorageController.clearLocalStorage("todoList");
     location.reload();
 });

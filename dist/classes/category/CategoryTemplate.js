@@ -1,7 +1,7 @@
-import { CategoryStore } from "./CategoryStore.js";
+import { LocalStorageController } from "../LocalStorageController.js";
 export class CategoryTemplate {
     render() {
-        let categories = CategoryStore.getCategoryList(); // string[] 형태로 반환
+        let categories = LocalStorageController.getLocalStorageList("categoryList");
         categories.forEach((e) => {
             this.addCategory(e);
         });

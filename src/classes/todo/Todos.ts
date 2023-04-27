@@ -1,19 +1,20 @@
 import { TodoItem } from "./TodoItem.js";
-import { TodoStore } from "./TodoStore.js";
 import { DateValidCheck } from "../../enum/DateValidCheck.js";
+import { LocalStorageController } from "../LocalStorageController.js";
 
 // TodoItem 클래스를 멤버로 가지고 있고 todo를 등록/수정/삭제하는 역할만 한다
 export class Todos {
   private todoItems: TodoItem[];
 
   constructor() {
-    this.todoItems = TodoStore.getTodoItems();
+    this.todoItems = LocalStorageController.getLocalStorageList<TodoItem[]>("todoList");
   }
 
   // todo item 추가하기
   addTodoItem(item: TodoItem): void {
     this.todoItems.push(item); // 새로운 item 추가
-    TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
+    // TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
+    LocalStorageController.saveLocalStorage<TodoItem[]>("todoList", this.todoItems);
   }
 
   // isDone 업데이트
@@ -26,7 +27,7 @@ export class Todos {
       }
     }
 
-    TodoStore.saveTodoItems(this.todoItems);
+    LocalStorageController.saveLocalStorage<TodoItem[]>("todoList", this.todoItems);
   }
 
   // 날짜 유효성 검사
@@ -61,8 +62,8 @@ export class Todos {
 
   // todo 삭제하기
   deleteTodoItem(id: string): void {
-    this.todoItems = this.todoItems.filter((e: any) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
-    TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
+    this.todoItems = this.todoItems.filter((e: TodoItem) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
+    LocalStorageController.saveLocalStorage<TodoItem[]>("todoList", this.todoItems);
   }
 }
 

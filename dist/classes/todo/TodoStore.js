@@ -4,11 +4,9 @@ export class TodoStore {
         let todoList = localStorage.getItem("todoList");
         if (todoList) {
             return JSON.parse(todoList);
-            // 가져온 데이터가 있다면 JSON.parse() 메소드를 사용하여 JSON 문자열을 파싱하고 반환한다.
         }
         else {
             return [];
-            // 가져온 데이터가 없다면 빈 배열([])을 반환한다.
         }
     }
     // localStorage에 저장

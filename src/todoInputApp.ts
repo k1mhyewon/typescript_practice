@@ -1,8 +1,8 @@
 import { TodoTemplate } from "./classes/todo/TodoTemplate.js";
 import { Todos } from "./classes/todo/Todos.js";
 import { TodoItem } from "./classes/todo/TodoItem.js";
-import { TodoStore } from "./classes/todo/TodoStore.js";
 import { DateValidCheck } from "./enum/DateValidCheck.js";
+import { LocalStorageController } from "./classes/LocalStorageController.js";
 
 const form = document.querySelector(".todo-form") as HTMLFormElement;
 const category = document.querySelector("#category") as HTMLSelectElement;
@@ -32,7 +32,7 @@ form.addEventListener("submit", (e: Event) => {
   // 날짜 유효성 검사 DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
 
   if (validCheck === DateValidCheck.PASS) {
-    const todoList: any = TodoStore.getTodoItems();
+    const todoList = LocalStorageController.getLocalStorageList<TodoItem[]>("todoList");
 
     if (todoList.length > 0) {
       n_id = parseInt(todoList[todoList.length - 1].todoId) + 1;
