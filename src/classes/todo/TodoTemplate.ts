@@ -2,9 +2,12 @@ import { TodoItem } from "./TodoItem.js";
 import { TodoStore } from "./TodoStore.js";
 import { DateValidCheck } from "./TodoItem.js";
 import { CategoryStore } from "../category/CategoryStore.js";
+import { Todos } from "./Todos.js";
+
+const todos = new Todos();
 
 export class TodoTemplate {
-  private todoItems: TodoItem[];
+  private todoItems: object[];
 
   constructor(){
     this.todoItems = TodoStore.getTodoItems();
@@ -15,7 +18,7 @@ export class TodoTemplate {
     const ul = document.querySelector("ul");
     
     if (this.todoItems.length > 0) { // 로컬에 있다면
-      this.todoItems.forEach((todo) => {
+      this.todoItems.forEach((todo: any) => {
         this.addTodo(todo);
       });
 
@@ -27,15 +30,7 @@ export class TodoTemplate {
     }
   }
 
-  addTodo(todo: TodoItem) {
-    const todoItem = new TodoItem(
-      todo.todoId,
-      todo.category,
-      todo.title,
-      todo.duedate,
-      false
-    );
-            
+  addTodo(todo: any) {
     const ul = document.querySelector("ul");
     const li = document.createElement("li");
     li.id = "li" + todo.todoId;
@@ -72,7 +67,8 @@ export class TodoTemplate {
     const category = document.createElement("h3");
     category.textContent = "[" + todo.category.toString() + "]";
 
-    const validcheck: DateValidCheck = todoItem.checkDate(todo.duedate.toString());
+    console.log(todo.duedate.toString());
+    const validcheck: DateValidCheck = todos.checkDate(todo.duedate.toString());
 
     const duedate = document.createElement("h4");
     duedate.textContent = "Due date: " + todo.duedate.toString();

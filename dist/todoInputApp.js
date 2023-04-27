@@ -14,7 +14,7 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     let n_id = 0; // todo id값
     let newTodoItem = new TodoItem(n_id.toString(), category.value, title.value, parseInt(duedate.value), false);
-    const validCheck = newTodoItem.checkDate(duedate.value);
+    const validCheck = todos.checkDate(duedate.value);
     // 날짜 유효성 검사 DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
     if (validCheck === 0) {
         const todoList = TodoStore.getTodoItems();

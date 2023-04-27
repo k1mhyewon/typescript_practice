@@ -1,6 +1,7 @@
-import { TodoItem } from "./TodoItem.js";
 import { TodoStore } from "./TodoStore.js";
 import { CategoryStore } from "../category/CategoryStore.js";
+import { Todos } from "./Todos.js";
+const todos = new Todos();
 export class TodoTemplate {
     constructor() {
         this.todoItems = TodoStore.getTodoItems();
@@ -19,7 +20,6 @@ export class TodoTemplate {
         }
     }
     addTodo(todo) {
-        const todoItem = new TodoItem(todo.todoId, todo.category, todo.title, todo.duedate, false);
         const ul = document.querySelector("ul");
         const li = document.createElement("li");
         li.id = "li" + todo.todoId;
@@ -50,7 +50,8 @@ export class TodoTemplate {
         }
         const category = document.createElement("h3");
         category.textContent = "[" + todo.category.toString() + "]";
-        const validcheck = todoItem.checkDate(todo.duedate.toString());
+        console.log(todo.duedate.toString());
+        const validcheck = todos.checkDate(todo.duedate.toString());
         const duedate = document.createElement("h4");
         duedate.textContent = "Due date: " + todo.duedate.toString();
         if (validcheck === 2) { // duedate가 지났다면

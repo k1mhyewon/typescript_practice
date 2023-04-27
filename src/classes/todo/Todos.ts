@@ -1,9 +1,10 @@
 import { TodoItem } from "./TodoItem.js";
 import { TodoStore } from "./TodoStore.js";
+import { DateValidCheck } from "./TodoItem.js";
 
 // TodoItem 클래스를 멤버로 가지고 있고 todo를 등록/수정/삭제하는 역할만 한다
 export class Todos {
-  private todoItems: TodoItem[];
+  private todoItems: any;
 
   constructor() {
     this.todoItems = TodoStore.getTodoItems();
@@ -28,9 +29,39 @@ export class Todos {
     TodoStore.saveTodoItems(this.todoItems);
   }
 
+  // 날짜 유효성 검사
+  checkDate(duedate: string): DateValidCheck {
+    let dateComp: string =
+      duedate.substring(0, 4) +
+      "-" +
+      duedate.substring(4, 6) +
+      "-" +
+      duedate.substring(6, 8);
+
+    let result: DateValidCheck = 1;
+    // 0: pass(true) 1:invalid date(false) 2:past date(false)
+
+    try {
+      const now = new Date();
+      const inputDate = new Date(dateComp);
+
+      inputDate.toISOString();
+      result = 0; // 0: pass(true)
+
+      if (inputDate < now) {
+        result = 2; // 2: past date(false)
+      }
+    } catch (e) {
+      result = 1; // 1: invalid date(false)
+      console.log(e);
+    }
+
+    return result;
+  }
+
   // todo 삭제하기
   deleteTodoItem(id: string): void {
-    this.todoItems = this.todoItems.filter((e) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
+    this.todoItems = this.todoItems.filter((e: any) => e.todoId !== id); // 받아온 id 값과 일치하는 부분만 삭제
     TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
   }
 }

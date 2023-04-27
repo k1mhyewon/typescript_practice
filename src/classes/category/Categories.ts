@@ -6,7 +6,7 @@ const categoryStore = new CategoryStore();
 
 export class Categories {
   private categories: string[];
-  private todoItems: TodoItem[];
+  private todoItems: any;
 
   constructor() {
     this.categories = CategoryStore.getCategoryList();
