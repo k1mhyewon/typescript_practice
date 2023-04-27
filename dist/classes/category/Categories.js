@@ -1,6 +1,4 @@
-import { CategoryStore } from "./CategoryStore.js";
 import { LocalStorageController } from "../LocalStorageController.js";
-const categoryStore = new CategoryStore();
 export class Categories {
     constructor() {
         this.categories = LocalStorageController.getLocalStorageList("categoryList");
@@ -18,7 +16,7 @@ export class Categories {
     // category 추가
     addCategory(item) {
         this.categories.push(item);
-        CategoryStore.saveCategory(this.categories);
+        LocalStorageController.saveLocalStorage("categoryList", this.categories);
     }
     // category 삭제 유효성 검사 - true 이면 사용중인 카테고리(삭제 불가)
     checkCategoryUsed(item) {
@@ -32,6 +30,6 @@ export class Categories {
     // category 삭제
     deleteCategory(item) {
         this.categories.filter((e) => e !== item);
-        CategoryStore.saveCategory(this.categories);
+        LocalStorageController.saveLocalStorage("categoryList", this.categories);
     }
 }

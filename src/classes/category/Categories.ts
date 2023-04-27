@@ -1,5 +1,4 @@
 import { TodoItem } from "../todo/TodoItem.js";
-import { CategoryStore } from "./CategoryStore.js";
 import { LocalStorageController } from "../LocalStorageController.js";
 
 export class Categories {
@@ -24,7 +23,7 @@ export class Categories {
   // category 추가
   addCategory(item: string): void {
     this.categories.push(item);
-    CategoryStore.saveCategory(this.categories);
+    LocalStorageController.saveLocalStorage<string[]>("categoryList", this.categories);
   }
 
   // category 삭제 유효성 검사 - true 이면 사용중인 카테고리(삭제 불가)
@@ -40,6 +39,6 @@ export class Categories {
   // category 삭제
   deleteCategory(item: string): void {
     this.categories.filter((e) => e !== item);
-    CategoryStore.saveCategory(this.categories);
+    LocalStorageController.saveLocalStorage<string[]>("categoryList", this.categories);
   }
 }
