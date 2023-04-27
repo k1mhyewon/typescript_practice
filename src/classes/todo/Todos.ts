@@ -1,10 +1,10 @@
 import { TodoItem } from "./TodoItem.js";
 import { TodoStore } from "./TodoStore.js";
-import { DateValidCheck } from "./TodoItem.js";
+import { DateValidCheck } from "../../enum/DateValidCheck.js";
 
 // TodoItem 클래스를 멤버로 가지고 있고 todo를 등록/수정/삭제하는 역할만 한다
 export class Todos {
-  private todoItems: any;
+  private todoItems: TodoItem[];
 
   constructor() {
     this.todoItems = TodoStore.getTodoItems();
@@ -38,7 +38,7 @@ export class Todos {
       "-" +
       duedate.substring(6, 8);
 
-    let result: DateValidCheck = 1;
+    let result: DateValidCheck = DateValidCheck.NODATE;
     // 0: pass(true) 1:invalid date(false) 2:past date(false)
 
     try {
@@ -46,13 +46,13 @@ export class Todos {
       const inputDate = new Date(dateComp);
 
       inputDate.toISOString();
-      result = 0; // 0: pass(true)
+      result = DateValidCheck.PASS; // 0: pass(true)
 
       if (inputDate < now) {
-        result = 2; // 2: past date(false)
+        result = DateValidCheck.PASTDATE; // 2: past date(false)
       }
     } catch (e) {
-      result = 1; // 1: invalid date(false)
+      result = DateValidCheck.NODATE; // 1: invalid date(false)
       console.log(e);
     }
 

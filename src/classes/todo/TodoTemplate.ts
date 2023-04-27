@@ -1,13 +1,13 @@
 import { TodoItem } from "./TodoItem.js";
 import { TodoStore } from "./TodoStore.js";
-import { DateValidCheck } from "./TodoItem.js";
+import { DateValidCheck } from "../../enum/DateValidCheck.js";
 import { CategoryStore } from "../category/CategoryStore.js";
 import { Todos } from "./Todos.js";
 
 const todos = new Todos();
 
 export class TodoTemplate {
-  private todoItems: object[];
+  private todoItems: TodoItem[];
 
   constructor(){
     this.todoItems = TodoStore.getTodoItems();
@@ -18,7 +18,7 @@ export class TodoTemplate {
     const ul = document.querySelector("ul");
     
     if (this.todoItems.length > 0) { // 로컬에 있다면
-      this.todoItems.forEach((todo: any) => {
+      this.todoItems.forEach((todo: TodoItem) => {
         this.addTodo(todo);
       });
 
@@ -30,7 +30,7 @@ export class TodoTemplate {
     }
   }
 
-  addTodo(todo: any) {
+  addTodo(todo: TodoItem) {
     const ul = document.querySelector("ul");
     const li = document.createElement("li");
     li.id = "li" + todo.todoId;
@@ -44,7 +44,7 @@ export class TodoTemplate {
 
     const labelDone = document.createElement("label");
     labelDone.htmlFor = "task" + todo.todoId;
-    labelDone.textContent = "Done";
+    labelDone.innerHTML = "Done";
 
     const inputUndone = document.createElement("input");
     inputUndone.type = "radio";
@@ -55,7 +55,7 @@ export class TodoTemplate {
 
     const labelUndone = document.createElement("label");
     labelUndone.htmlFor = "task" + todo.todoId;
-    labelUndone.textContent = "Undone";
+    labelUndone.innerHTML = "Undone";
 
     if (todo.isDone) {
       inputDone.checked = true;
@@ -65,23 +65,23 @@ export class TodoTemplate {
     }
 
     const category = document.createElement("h3");
-    category.textContent = "[" + todo.category.toString() + "]";
+    category.innerHTML = "[" + todo.category.toString() + "]";
 
     console.log(todo.duedate.toString());
     const validcheck: DateValidCheck = todos.checkDate(todo.duedate.toString());
 
     const duedate = document.createElement("h4");
-    duedate.textContent = "Due date: " + todo.duedate.toString();
+    duedate.innerHTML = "Due date: " + todo.duedate.toString();
 
     if( validcheck === 2){ // duedate가 지났다면
       duedate.setAttribute("class", "due-date-over");
     }
 
     const title = document.createElement("h4");
-    title.textContent = todo.title;
+    title.innerHTML = todo.title;
 
     const button = document.createElement("button");
-    button.textContent = "delete";
+    button.innerHTML = "delete";
     button.setAttribute("class", "delete-btn");
     button.setAttribute("id", "delete-btn-" + todo.todoId);
 
@@ -107,7 +107,7 @@ export class TodoTemplate {
     for(let category of categories) {
       const option = document.createElement("option");
       option.value = category;
-      option.textContent = category;
+      option.innerHTML = category;
 
       select?.append(option);
     }
@@ -121,8 +121,7 @@ export class TodoTemplate {
 
     let aTagCategory = document.querySelector("#empty-categoty-alert") as HTMLSelectElement;
 
-    if(!categories || categories.length === 0){
-      console.log("empty");
+    if(!categories || categories.length === 0){      
       aTagCategory.removeAttribute("class");
     }
   }

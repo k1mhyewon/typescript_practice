@@ -2,7 +2,7 @@ import { TodoTemplate } from "./classes/todo/TodoTemplate.js";
 import { Todos } from "./classes/todo/Todos.js";
 import { TodoItem } from "./classes/todo/TodoItem.js";
 import { TodoStore } from "./classes/todo/TodoStore.js";
-import { DateValidCheck } from "./classes/todo/TodoItem.js"; // enum
+import { DateValidCheck } from "./enum/DateValidCheck.js";
 
 const form = document.querySelector(".todo-form") as HTMLFormElement;
 const category = document.querySelector("#category") as HTMLSelectElement;
