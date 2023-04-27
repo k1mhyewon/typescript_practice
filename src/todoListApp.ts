@@ -9,7 +9,7 @@ todoTemp.render();
 
 // 리스트 개별 삭제
 const delBtn = document.querySelectorAll(".delete-btn");
-Array.from(delBtn).forEach((btn) => {
+delBtn.forEach((btn) => {
   btn.addEventListener("click", (e: Event) => {  
     const id: string = btn.id.split("delete-btn-")[1];
     
@@ -21,7 +21,7 @@ Array.from(delBtn).forEach((btn) => {
 
 // 완료 미완료
 const radios = document.querySelectorAll(".radios");
-Array.from(radios).forEach((radio) => {
+radios.forEach((radio) => {
   radio.addEventListener("click", (e: Event) => {
     const id: string = radio.id.split("task")[1];
     const str_bool: string = (radio as HTMLInputElement).value;

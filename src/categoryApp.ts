@@ -26,7 +26,7 @@ categoryform.addEventListener("submit", (e: Event) => {
 
 // 카테고리 개별 삭제
 const delBtn = document.querySelectorAll(".delete-button");
-Array.from(delBtn).forEach((btn) => {
+delBtn.forEach((btn) => {
   btn.addEventListener("click", (e: Event) => {
     const id: string = btn.id;
 

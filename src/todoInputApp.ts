@@ -31,7 +31,7 @@ form.addEventListener("submit", (e: Event) => {
   const validCheck: DateValidCheck = todos.checkDate(duedate.value);
   // 날짜 유효성 검사 DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
 
-  if (validCheck === 0) {
+  if (validCheck === DateValidCheck.PASS) {
     const todoList: any = TodoStore.getTodoItems();
 
     if (todoList.length > 0) {
@@ -41,10 +41,10 @@ form.addEventListener("submit", (e: Event) => {
 
     todos.addTodoItem(newTodoItem);
     location.href = "todoList.html";
-  } else if (validCheck === 1) {
+  } else if (validCheck === DateValidCheck.NODATE) {
     alert("날짜를 올바르게 입력하세요");
     duedate.value = "";
-  } else if (validCheck === 2) {
+  } else if (validCheck === DateValidCheck.PASTDATE) {
     alert("지난 날짜는 입력할 수 없습니다.");
     duedate.value = "";
   }
