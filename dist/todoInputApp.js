@@ -16,7 +16,6 @@ form.addEventListener("submit", (e) => {
     let n_id = 0; // todo id값
     let newTodoItem = new TodoItem(n_id.toString(), category.value, title.value, parseInt(duedate.value), false);
     const validCheck = todos.checkDate(duedate.value);
-    // 날짜 유효성 검사 DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
     if (validCheck === DateValidCheck.PASS) {
         const todoList = LocalStorageController.getLocalStorageList("todoList");
         if (todoList.length > 0) {

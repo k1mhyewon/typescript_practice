@@ -2,7 +2,7 @@ import { TodoItem } from "./TodoItem.js";
 import { DateValidCheck } from "../../enum/DateValidCheck.js";
 import { LocalStorageController } from "../LocalStorageController.js";
 
-// TodoItem 클래스를 멤버로 가지고 있고 todo를 등록/수정/삭제하는 역할만 한다
+
 export class Todos {
   private todoItems: TodoItem[];
 
@@ -11,9 +11,8 @@ export class Todos {
   }
 
   // todo item 추가하기
-  addTodoItem(item: TodoItem): void {
+   addTodoItem(item: TodoItem): void {
     this.todoItems.push(item); // 새로운 item 추가
-    // TodoStore.saveTodoItems(this.todoItems); // localStorage에 저장
     LocalStorageController.saveLocalStorage<TodoItem[]>("todoList", this.todoItems);
   }
 
@@ -40,7 +39,6 @@ export class Todos {
       duedate.substring(6, 8);
 
     let result: DateValidCheck = DateValidCheck.NODATE;
-    // 0: pass(true) 1:invalid date(false) 2:past date(false)
 
     try {
       const now = new Date();

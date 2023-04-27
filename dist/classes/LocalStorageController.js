@@ -2,12 +2,7 @@ export class LocalStorageController {
     // LocalStorage 얻어옴
     static getLocalStorageList(name) {
         let localList = localStorage.getItem(name);
-        if (localList) {
-            return JSON.parse(localList);
-        }
-        else {
-            return [];
-        }
+        return localList != null ? JSON.parse(localList) : [];
     }
     // localStorage에 저장
     static saveLocalStorage(name, item) {

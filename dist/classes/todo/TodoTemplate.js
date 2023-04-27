@@ -66,9 +66,8 @@ export class TodoTemplate {
         li.append(inputDone, labelDone, inputUndone, labelUndone, category, duedate, title, button);
         ul.append(li);
     }
-    // localStorage에 있는 "categoryList" 키값을 가진 value 얻어와서 select에 넣어주기
+    // 카테고리 select 가져오기
     getCategorySelect() {
-        // const categories: string[] = CategoryStore.getCategoryList();
         const categories = LocalStorageController.getLocalStorageList("categoryList");
         const select = document.querySelector("select");
         for (let category of categories) {
@@ -82,9 +81,9 @@ export class TodoTemplate {
     // 카테고리 항목이 없다면 안내문구 보여주기
     emptyCategoryCheck() {
         const categories = LocalStorageController.getLocalStorageList("categoryList");
-        let aTagCategory = document.querySelector("#empty-categoty-alert");
+        let aTagAlert = document.querySelector("#empty-categoty-alert");
         if (!categories || categories.length === 0) {
-            aTagCategory.removeAttribute("class");
+            aTagAlert.removeAttribute("class");
         }
     }
 }

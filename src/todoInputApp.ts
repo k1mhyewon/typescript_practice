@@ -29,8 +29,7 @@ form.addEventListener("submit", (e: Event) => {
   );
 
   const validCheck: DateValidCheck = todos.checkDate(duedate.value);
-  // 날짜 유효성 검사 DateValidCheck => 0: pass(true) 1:invalid date(false) 2:past date(false)
-
+  
   if (validCheck === DateValidCheck.PASS) {
     const todoList = LocalStorageController.getLocalStorageList<TodoItem[]>("todoList");
 

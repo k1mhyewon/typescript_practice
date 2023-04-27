@@ -3,16 +3,13 @@ export class LocalStorageController {
     // LocalStorage 얻어옴
     static getLocalStorageList<T>(name: string): T {
         let localList = localStorage.getItem(name);
-        if (localList) {
-          return JSON.parse(localList) as T;
-        } else {
-          return [] as T;
-        }
+        
+        return localList != null ? JSON.parse(localList) as T : [] as T;
     }
 
     // localStorage에 저장
     static saveLocalStorage<T>(name: string, item: T): void {
-        localStorage.setItem(name, JSON.stringify(item));
+        localStorage.setItem(name, JSON.stringify(item));           
     }
 
     // localStorage 비우기

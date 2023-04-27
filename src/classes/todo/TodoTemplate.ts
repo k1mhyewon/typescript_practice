@@ -61,7 +61,7 @@ export class TodoTemplate {
       li.className = "done";
     } else {
       inputUndone.checked = true;
-    }
+    } 
 
     const category = document.createElement("h3");
     category.innerHTML = "[" + todo.category.toString() + "]";
@@ -97,9 +97,8 @@ export class TodoTemplate {
     ul!.append(li);
   }
 
-  // localStorage에 있는 "categoryList" 키값을 가진 value 얻어와서 select에 넣어주기
+  // 카테고리 select 가져오기
   getCategorySelect() {
-    // const categories: string[] = CategoryStore.getCategoryList();
     const categories = LocalStorageController.getLocalStorageList<string[]>("categoryList");
 
     const select = document.querySelector("select");
@@ -111,7 +110,6 @@ export class TodoTemplate {
 
       select?.append(option);
     }
-
     // <option value="Workout">Workout</option>
   }
 
@@ -119,10 +117,10 @@ export class TodoTemplate {
   emptyCategoryCheck() {
     const categories = LocalStorageController.getLocalStorageList<string[]>("categoryList");
 
-    let aTagCategory = document.querySelector("#empty-categoty-alert") as HTMLSelectElement;
+    let aTagAlert = document.querySelector("#empty-categoty-alert") as HTMLSelectElement;
 
     if(!categories || categories.length === 0){      
-      aTagCategory.removeAttribute("class");
+      aTagAlert.removeAttribute("class");
     }
   }
 
