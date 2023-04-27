@@ -38,7 +38,7 @@ export class Categories {
 
   // category 삭제
   deleteCategory(item: string): void {
-    this.categories.filter((e) => e !== item);
+    this.categories = this.categories.filter((e) => e !== item);
     LocalStorageController.saveLocalStorage<string[]>("categoryList", this.categories);
   }
 }

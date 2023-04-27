@@ -39,6 +39,6 @@ delBtn.forEach((btn) => {
       alert("현재 사용중인 카테고리이므로 삭제가 불가합니다.");
     }
 
-    location.reload();
+    // location.reload();
   });
 });

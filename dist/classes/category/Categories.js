@@ -29,7 +29,7 @@ export class Categories {
     }
     // category 삭제
     deleteCategory(item) {
-        this.categories.filter((e) => e !== item);
+        this.categories = this.categories.filter((e) => e !== item);
         LocalStorageController.saveLocalStorage("categoryList", this.categories);
     }
 }
